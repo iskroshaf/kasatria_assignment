@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -10,14 +11,13 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.static('public'));
-
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/sheets', async (req, res) => {
     try {
         const { accessToken, spreadsheetId, range } = req.body;
-
         const response = await fetch(
             `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
             {
@@ -27,7 +27,6 @@ app.post('/api/sheets', async (req, res) => {
                 }
             }
         );
-
         const data = await response.json();
         res.json(data);
     } catch (error) {
@@ -48,10 +47,10 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'Server is running' });
 });
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.listen(PORT, () => {
-    console.log(`  API Server running on http://localhost:${PORT}`);
-    console.log(`  API endpoints available at:`);
-    console.log(`   - GET  http://localhost:${PORT}/api/config`);
-    console.log(`   - POST http://localhost:${PORT}/api/sheets`);
-    console.log(`   - GET  http://localhost:${PORT}/api/health`);
+    console.log(`Server running on port ${PORT}`);
 });
