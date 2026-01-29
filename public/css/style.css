@@ -1,0 +1,191 @@
+body {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: Helvetica, sans-serif;
+    overflow: hidden;
+}
+
+#login-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #333;
+}
+
+#login-box {
+    text-align: center;
+    padding: 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.google-icon-wrapper {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.google-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.google-btn {
+    margin-top: 20px;
+    padding: 6px 16px 6px 6px;
+    background: #4b84ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    width: fit-content;
+    align-self: center;
+}
+
+.google-btn:hover {
+    background: #1d4ed8;
+}
+
+#menu {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.menu-btn {
+    color: rgba(127, 255, 255, 0.75);
+    background: transparent;
+    outline: 1px solid rgba(127, 255, 255, 0.75);
+    border: 0px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 5px;
+    transition: all 0.2s;
+}
+
+.menu-btn:hover {
+    background-color: rgba(0, 255, 255, 0.5);
+    color: #fff;
+}
+
+.element {
+    width: 140px;
+    height: 200px;
+    background-color: #000;
+    border: 2px solid #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    box-sizing: border-box;
+    cursor: default;
+    user-select: none;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.element.red {
+    border-color: #EF3022;
+    box-shadow: 0 0 10px #EF3022;
+}
+
+.element.yellow {
+    border-color: #fdca35;
+    box-shadow: 0 0 10px #fdca35;
+}
+
+.element.green {
+    border-color: #3A9F48;
+    box-shadow: 0 0 10px #3A9F48;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 10px;
+    color: #fff;
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 1px;
+    object-fit: cover;
+    background-color: #333;
+    display: block;
+}
+
+.card-footer {
+    text-align: center;
+    width: 100%;
+}
+
+.card-name {
+    font-weight: bold;
+    font-size: 10px;
+    color: #fff;
+}
+
+.card-sub {
+    font-size: 8px;
+    margin-top: 6px;
+}
+
+.element.red .card-sub,
+.element.red .card-name,
+.element.red .card-header {
+    color: #fff0f0;
+    text-shadow: 0 0 5px #EF3022, 0 0 12px #EF3022;
+}
+
+.element.yellow .card-sub,
+.element.yellow .card-name,
+.element.yellow .card-header {
+    color: #fffff0;
+    text-shadow: 0 0 5px #fdca35, 0 0 12px #fdca35;
+}
+
+.element.green .card-sub,
+.element.green .card-name,
+.element.green .card-header {
+    color: #f0fff4;
+    text-shadow: 0 0 5px #3A9F48, 0 0 12px #3A9F48;
+}
