@@ -10,7 +10,7 @@ let gisInited = false;
 let tableData = [];
 let camera, scene, renderer, controls;
 const objects = [];
-const targets = { table: [], sphere: [], helix: [], grid: [] };
+const targets = { table: [], sphere: [], helix: [], grid: [], tetrahedron: [] };
 let currentAccessToken = null;
 
 async function loadConfig() {
@@ -178,6 +178,7 @@ function initVisualization() {
         objects.push(object);
     }
 
+    // TABLE
     for (let i = 0; i < objects.length; i++) {
         const object = new THREE.Object3D();
         const col = i % 20;
@@ -187,6 +188,7 @@ function initVisualization() {
         targets.table.push(object);
     }
 
+    // SPHERE
     const vector = new THREE.Vector3();
     for (let i = 0; i < objects.length; i++) {
         const phi = Math.acos(-1 + (2 * i) / objects.length);
@@ -198,6 +200,7 @@ function initVisualization() {
         targets.sphere.push(object);
     }
 
+    // HELIX
     for (let i = 0; i < objects.length; i++) {
         const theta = i * 0.175 + Math.PI;
         const y = -(i * 8) + 450;
@@ -212,6 +215,7 @@ function initVisualization() {
         targets.helix.push(object);
     }
 
+    // GRID
     for (let i = 0; i < objects.length; i++) {
         const object = new THREE.Object3D();
         const x = (i % 5) * 400 - 800;
@@ -220,6 +224,43 @@ function initVisualization() {
         object.position.set(x, y, z);
         targets.grid.push(object);
     }
+
+    // TETRAHEDRON
+    let count = 0;
+    let loopExit = false;
+
+    for (let i = 0; i < 20; i++) {
+        if (loopExit) break;
+
+        for (let r = 0; r <= i; r++) {
+            for (let c = 0; c <= r; c++) {
+
+                if (count >= objects.length) {
+                    loopExit = true;
+                    break;
+                }
+
+                const object = new THREE.Object3D();
+
+                const a = 160;
+                const rowH = Math.sqrt(3) / 2 * a;
+                const layerH = Math.sqrt(2 / 3) * a;
+
+                const x = (c - r / 2) * a;
+                const z = (r * rowH) - (i * rowH / 2);
+                const y = -(i * layerH) + 800;
+
+                object.position.set(x, y, z);
+
+                vector.copy(object.position).multiplyScalar(2);
+                object.lookAt(vector);
+
+                targets.tetrahedron.push(object);
+                count++;
+            }
+        }
+    }
+
 
     renderer = new THREE.CSS3DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -233,6 +274,7 @@ function initVisualization() {
     document.getElementById('sphere').addEventListener('click', function () { transform(targets.sphere, 2000); });
     document.getElementById('helix').addEventListener('click', function () { transform(targets.helix, 2000); });
     document.getElementById('grid').addEventListener('click', function () { transform(targets.grid, 2000); });
+    document.getElementById('tetrahedron').addEventListener('click', function () { transform(targets.tetrahedron, 2000); });
 
     transform(targets.table, 2000);
     window.addEventListener('resize', onWindowResize);
