@@ -74,9 +74,15 @@ body {
     position: absolute;
     bottom: 20px;
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 12px;
     z-index: 10;
 }
+
 
 .menu-btn {
     color: rgba(127, 255, 255, 0.75);
@@ -91,6 +97,7 @@ body {
     text-transform: uppercase;
     margin: 0 5px;
     transition: all 0.2s;
+    flex: 0 1 auto;
 }
 
 .menu-btn:hover {
