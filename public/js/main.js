@@ -228,39 +228,31 @@ function initVisualization() {
     // TETRAHEDRON
     let count = 0;
     let loopExit = false;
+    const spacing = 180; 
 
-    for (let i = 0; i < 20; i++) {
+    const rowStep = spacing * (Math.sqrt(3) / 2);
+
+    const layerStep = spacing * Math.sqrt(2 / 3);
+
+    for (let i = 0; i < 30; i++) {
         if (loopExit) break;
-
         for (let r = 0; r <= i; r++) {
             for (let c = 0; c <= r; c++) {
-
                 if (count >= objects.length) {
                     loopExit = true;
                     break;
                 }
-
                 const object = new THREE.Object3D();
-
-                const a = 160;
-                const rowH = Math.sqrt(3) / 2 * a;
-                const layerH = Math.sqrt(2 / 3) * a;
-
-                const x = (c - r / 2) * a;
-                const z = (r * rowH) - (i * rowH / 2);
-                const y = -(i * layerH) + 800;
-
+                const x = (c - r / 2) * spacing;
+                const z = (r - i / 2) * rowStep;
+                const y = -(i * layerStep) + 450;
                 object.position.set(x, y, z);
-
-                vector.copy(object.position).multiplyScalar(2);
-                object.lookAt(vector);
-
+                object.rotation.x = -Math.PI / 12;
                 targets.tetrahedron.push(object);
                 count++;
             }
         }
     }
-
 
     renderer = new THREE.CSS3DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
